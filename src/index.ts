@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * Memories.ai MCP Server
+ * VideoSeek MCP Server
  *
- * Exposes Memories.ai's video understanding, persistent visual memory,
- * and semantic search capabilities to any MCP-compatible AI agent.
+ * Find anything in any video. Semantic video search, video Q&A,
+ * persistent memory, and social media import for AI agents.
+ *
+ * Powered by Memories.ai video understanding API.
  *
  * Transport: stdio (for Claude Desktop, Cursor, Windsurf, etc.)
  *
@@ -34,7 +36,7 @@ const client = new MemoriesClient(API_KEY);
 // ─── Server Instance ────────────────────────────────────────────────────────
 
 const server = new McpServer({
-  name: "memories-ai",
+  name: "videoseek",
   version: "1.0.0",
 });
 
@@ -62,7 +64,7 @@ server.registerTool(
   {
     title: "Upload Video",
     description:
-      "Upload and index a video from a URL into the Memories.ai library. " +
+      "Upload and index a video from a URL into your VideoSeek library. " +
       "Returns a videoNo for tracking. The video will be processed asynchronously — " +
       "use get_video_status to check when it's ready.",
     inputSchema: {
@@ -92,7 +94,7 @@ server.registerTool(
   {
     title: "List Videos",
     description:
-      "List all indexed videos in your Memories.ai library. " +
+      "List all indexed videos in your VideoSeek library. " +
       "Supports pagination and filtering by status.",
     inputSchema: {
       unique_id: z.string().optional().describe("Namespace (default: 'default')"),
@@ -142,7 +144,7 @@ server.registerTool(
   "delete_videos",
   {
     title: "Delete Videos",
-    description: "Delete one or more videos from the Memories.ai library by their video numbers.",
+    description: "Delete one or more videos from your VideoSeek library by their video numbers.",
     inputSchema: {
       video_nos: z.array(z.string()).min(1).describe("Array of video numbers to delete (e.g. ['VI123456'])"),
       unique_id: z.string().optional().describe("Namespace (default: 'default')"),
@@ -500,7 +502,7 @@ server.registerTool(
     title: "Import from URL",
     description:
       "Import a video from a social media URL (TikTok, YouTube, Instagram, Twitter, etc.) " +
-      "directly into your Memories.ai library for indexing and analysis.",
+      "directly into your VideoSeek library for indexing and analysis.",
     inputSchema: {
       url: z.string().url().describe("Social media video URL"),
       unique_id: z.string().optional().describe("Namespace (default: 'default')"),
@@ -588,7 +590,7 @@ server.registerResource(
   "video-library",
   "memories://videos",
   {
-    description: "List of all indexed videos in the current Memories.ai namespace",
+    description: "List of all indexed videos in the current VideoSeek namespace",
     mimeType: "application/json",
   },
   async () => {
@@ -765,7 +767,7 @@ server.registerPrompt(
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Memories.ai MCP Server running on stdio");
+  console.error("VideoSeek MCP Server running on stdio");
   console.error(`Namespace: ${DEFAULT_UNIQUE_ID}`);
 }
 
