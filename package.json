@@ -1,0 +1,47 @@
+{
+  "name": "memories-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Memories.ai — AI video understanding, persistent visual memory, and semantic search for AI agents",
+  "type": "module",
+  "bin": {
+    "memories-mcp": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod 755 build/index.js",
+    "start": "node build/index.js",
+    "dev": "tsc --watch"
+  },
+  "files": [
+    "build"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "memories-ai",
+    "video-understanding",
+    "ai-agent",
+    "semantic-search",
+    "visual-memory",
+    "video-analysis",
+    "llm",
+    "claude"
+  ],
+  "author": "Memories.ai",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/memories-ai/memories-mcp"
+  },
+  "homepage": "https://memories.ai"
+}
